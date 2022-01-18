@@ -7,7 +7,7 @@ from cdlib.classes import *
 from cdlib import algorithms
 from matplotlib import pyplot as plt
 
-def read(file, path = '../nets'):
+def read(file, path = './nets'):
   """
   Construct undirected multigraph G from specified file in Pajek format.
   """

@@ -3,7 +3,7 @@ from time import *
 import operator as op
 import networkx as nx
 
-def read(file, path = '../nets'):
+def read(file, path = './nets'):
   """
   Construct undirected multigraph G from specified file in Pajek format.
   """
@@ -31,25 +31,26 @@ def info(G):
   print("{0:>15s} | {1:.1f}% ({2:,d})".format('Components', 100.0 * len(CCs[0]) / G.number_of_nodes(), len(CCs)))
   print("{0:>15s} | {1:.1f} sec\n".format('Time', time() - tic))
 
-#def tops(G, centrality, label, n = 15):
-#  """
-#  Compute and print out node centralities of undirected multigraph G.
-#  """
-#  print("{0:>15s} | '{1:s}'".format('Graph', G.name.replace('_', '-')))
-#  print("{0:>15s} | '{1:s}'".format('Centrality', label))
-#  for p, (i, c) in enumerate(sorted(centrality.items(), key = op.itemgetter(1), reverse = True)):
-#    if p < n:
-#      print("{0:>15.8f} | '{1:s}' ({2:,d})".format(c, i, G.degree(i)))
-#  print()
+def tops(G, centrality, label, n = 15):
+ """
+ Compute and print out node centralities of undirected multigraph G.
+ """
+ print("{0:>15s} | '{1:s}'".format('Graph', G.name.replace('_', '-')))
+ print("{0:>15s} | '{1:s}'".format('Centrality', label))
+ for p, (i, c) in enumerate(sorted(centrality.items(), key = op.itemgetter(1), reverse = True)):
+   if p < n:
+     print("{0:>15.8f} | '{1:s}' ({2:,d})".format(c, i, G.degree(i)))
+ print()
 
 tic = time()
 
 # Constructs a graph of real network
 
 G = read('imdb')
-  
+
 # Prints out statistics of real network
-  
+
 info(G)
+tops(G, nx.pagerank(G), 'pagerank')
 
 print("{0:>15s} | {1:.1f} sec\n".format('Total', time() - tic))
