@@ -23,3 +23,5 @@ lectures/represent/
 lectures/science/
 lectures/visuals/
 misc/
+.idea
+*.csv
